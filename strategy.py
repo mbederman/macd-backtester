@@ -1,7 +1,5 @@
 import backtrader as bt
 import math
-from new_indicators import VolumeWeightedAveragePrice
-
 
 class MACDStrategy(bt.Strategy):
     def __init__(self):
@@ -60,18 +58,6 @@ class MACDStrategy2(bt.Strategy):
         if self.position.size > 0:
             if self.data.close > (1.02 * self.executed_price):
                 self.sell(size=self.size)
-
-
-    #   if self.position.size == 0 and self.data.close > self.sma:
-        #       if self.crossover > 0:
-        #            amt_to_invest = (.95 * self.broker.cash)
-        #           self.size = math.floor(amt_to_invest / self.data.close)
-        #
-        #           order = self.buy(size=self.size)
-        #
-        #   if self.position.size > 0:
-        #       if self.crossover < 0:
-        #           self.sell(size=self.size)
 
     def notify_order(self, order):
         if order.status in [order.Expired]:

@@ -1,13 +1,14 @@
 import pandas as pd
 import backtrader as bt
-from strategy import *
-
-STARTING_PORTFOLIO_VALUE = 1000000.0
+from strategy import MACDStrategy, MACDStrategy2
+from config import STARTING_PORTFOLIO_VALUE, TICKER, DATA_DIR
 
 cerebro = bt.Cerebro()
 cerebro.broker.setcash(STARTING_PORTFOLIO_VALUE)
 
-prices = pd.read_csv("AMD.csv", index_col="time", parse_dates=True)
+filepath = f"{DATA_DIR}{TICKER}.csv"
+
+prices = pd.read_csv(filepath, index_col="time", parse_dates=True)
 
 feed = bt.feeds.PandasData(dataname=prices)
 cerebro.adddata(feed)

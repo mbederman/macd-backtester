@@ -12,7 +12,19 @@ prices = pd.read_csv(filepath, index_col="time", parse_dates=True)
 
 feed = bt.feeds.PandasData(dataname=prices)
 cerebro.adddata(feed)
-cerebro.addstrategy(MACDStrategy2)
+
+selection = None
+
+while selection == None: 
+    selection = input("Do you want to run strategy 1 or 2: ")
+
+    if selection == "1":
+        cerebro.addstrategy(MACDStrategy)
+    elif selection == "2":
+        cerebro.addstrategy(MACDStrategy2)
+    else:
+        selection = None
+        print("Please enter a valid strategy!")
 
 cerebro.run()
 
